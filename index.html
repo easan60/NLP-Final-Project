@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğal Dil İşleme Yorum Puan Sayfası</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="row">
+        <br class="col-12 border my-5" style="height:70px">
+            <img src="https://www.intelegencia.com/media/hvtj2dio/amazon-product-listing-the-ultimate-guide.jpg" width="100%" height="300px"/></br>
+        </div>
+        <div class="col-12">
+            <h2 class="text-danger text-center">Lütfen almış olduğunuz ürüne yorum ekleyiniz ve biz yorumunuzu değerlendirelim!</h2>
+        </div>
+        <div class="col-12">
+            <form method="POST" class="text-center">
+                <textarea class="form-control my-2 mb-3  bg-light" rows="4" cols="50" name="tweet" placeholder="Yorumunuzu buraya yazınız..."></textarea>
+                <input type="submit" class="btn btn-warning form-control w-50 form-control-lg text-dark" value="YORUM DEĞERLENDİRMESİ YAP">                
+                <br>
+                {% if value %}
+                <h1><b> Yorumunuzu <span class="text-succes">{{ value }}</span>   olarak değerlendirdik. </b> </h1>
+                {% endif %}
+                {% if value == "positive" %}
+                <span ><img src="https://cdn.pixabay.com/photo/2018/07/04/08/51/graphic-3515619_960_720.png" style="width:200px;height:200px;"></span>
+                {% elif value == "negative" %}
+                <span ><img src="https://st.depositphotos.com/1801426/3933/v/950/depositphotos_39330353-stock-illustration-sad-emoticon.jpg" style="width:200px;height:200px;"></span>
+                {% else  %}
+                {% if value %}
+                <span><img src="https://images.clipartlogo.com/files/istock/previews/9106/91064933-straight-face-emoticon.jpg" style="width:200px;height:200px;"></span>
+                {% endif %}
+                {% endif %}
+            </form>            
+        </div>
+    </div>
+</div>
+</body>
+</html>
