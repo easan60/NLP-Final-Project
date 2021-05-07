@@ -11,29 +11,38 @@
 <div class="container">
     <div class="row">
         <br class="col-12 border my-5" style="height:70px">
-            <img src="https://www.intelegencia.com/media/hvtj2dio/amazon-product-listing-the-ultimate-guide.jpg" width="100%" height="300px"/></br>
+            <img src="https://www.intelegencia.com/media/hvtj2dio/amazon-product-listing-the-ultimate-guide.jpg" width="100%" height="150px"/></br>
         </div>
         <div class="col-12">
             <h2 class="text-danger text-center">Lütfen almış olduğunuz ürüne yorum ekleyiniz ve biz yorumunuzu değerlendirelim!</h2>
         </div>
-        <div class="col-12">
-            <form method="POST" class="text-center">
-                <textarea class="form-control my-2 mb-3  bg-light" rows="4" cols="50" name="tweet" placeholder="Yorumunuzu buraya yazınız..."></textarea>
-                <input type="submit" class="btn btn-warning form-control w-50 form-control-lg text-dark" value="YORUM DEĞERLENDİRMESİ YAP">                
-                <br>
-                {% if value %}
-                <h1><b> Yorumunuzu <span class="text-succes">{{ value }}</span>   olarak değerlendirdik. </b> </h1>
-                {% endif %}
-                {% if value == "positive" %}
-                <span ><img src="https://cdn.pixabay.com/photo/2018/07/04/08/51/graphic-3515619_960_720.png" style="width:200px;height:200px;"></span>
-                {% elif value == "negative" %}
-                <span ><img src="https://st.depositphotos.com/1801426/3933/v/950/depositphotos_39330353-stock-illustration-sad-emoticon.jpg" style="width:200px;height:200px;"></span>
-                {% else  %}
-                {% if value %}
-                <span><img src="https://images.clipartlogo.com/files/istock/previews/9106/91064933-straight-face-emoticon.jpg" style="width:200px;height:200px;"></span>
-                {% endif %}
-                {% endif %}
-            </form>            
+        <div class="col-12 row">
+            <div class="col-6 border bg-light">
+                <form method="POST" class="text-center">
+                    <textarea class="form-control my-2 mb-3  bg-light" rows="10" cols="50" name="tweet">{{examples_data}}</textarea>
+                    <input type="submit" class="btn btn-warning form-control w-50 form-control-lg text-dark" value="YORUM DEĞERLENDİRMESİ YAP">                
+                </form>
+            </div>
+            <div class="col-6 border bg-light">
+                <textarea class="form-control my-2 mb-3  bg-light" disabled rows="12" cols="50" placeholder="Yorumunuzun türkçe çevirisi...">
+                {{sentence_tr}}
+                </textarea>
+            </div>            
+        </div>
+        <div class="col-12 text-center">
+            <br>
+            {% if value %}
+            <h1><b> Yorumunuzu <span class="text-succes">{{ value }}</span>   olarak değerlendirdik. </b> </h1>
+            {% endif %}
+            {% if value == "positive" %}
+            <span ><img src="https://cdn.pixabay.com/photo/2018/07/04/08/51/graphic-3515619_960_720.png" style="width:150px;height:150px;"></span>
+            {% elif value == "negative" %}
+            <span ><img src="https://st.depositphotos.com/1801426/3933/v/950/depositphotos_39330353-stock-illustration-sad-emoticon.jpg" style="width:150px;height:150px;"></span>
+            {% else  %}
+            {% if value %}
+            <span><img src="https://images.clipartlogo.com/files/istock/previews/9106/91064933-straight-face-emoticon.jpg" style="width:150px;height:150px;"></span>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>

@@ -17,6 +17,9 @@ from string import punctuation, digits
 from flask import Flask, request, render_template, url_for
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
+from textblob import TextBlob
+from langdetect import detect
+
 
 start_time = time.time()
 
@@ -37,8 +40,27 @@ def home():
 	vcb = open("Vocab.pkl", 'rb')
 	loaded_vocab = pickle.load(vcb)
 
+	#kullanıcıdan gelen verinin dili bulundu ve eğer ingilizce değilse ingilizceye çevrilerek examples'e eşitlendi
+	try:
+		examples = request.form['tweet']
+		lng=detect(examples) 
+		sentence_tr=""
+		if lng!="en":
+			examples=str(TextBlob(examples).translate(to='en'))
+
+
+		if lng=="tr":
+			sentence_tr=examples
+		else:
+			sentence_tr=str(TextBlob(examples).translate(to='tr'))
+			sentence_tr=re.sub(r"\d+","", sentence_tr)
+			sentence_tr=re.sub(r"\r","", sentence_tr)
+			sentence_tr=re.sub(r"\t","", sentence_tr)
+			sentence_tr=sentence_tr.strip()
+	except:
+		print("Error")
+
     #kullanıcıdan gelen veri temizlendi
-	examples = request.form['tweet']
 	examples = examples.lower()
 	examples = examples.replace('\n',' ')
 	examples = re.sub(r"[^\w\s]", ' ', examples)
@@ -46,7 +68,7 @@ def home():
 	examples = re.sub(r"\n"," ", examples)
 	examples = re.sub(r"\r","", examples)
 	examples = [examples]
-    
+
     #gelen yorum CountVectorizer ile bir matrixe çevrildi
 	count_vect = CountVectorizer(stop_words='english',vocabulary=loaded_vocab)
 	x_count = count_vect.fit_transform(examples)
@@ -56,4 +78,4 @@ def home():
 
     #tahmin edilen bilgi index.html sayfasına gönderildi.
 	result=predicted[0]
-	return render_template('index.html',value=result)
+	return render_template('index.html',value=result,sentence_tr=sentence_tr,examples_data=request.form['tweet'])
